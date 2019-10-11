@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
+import '../styles/Landing.css';
 
 class Landing extends Component {
     constructor() {
@@ -16,8 +17,8 @@ class Landing extends Component {
     }
     render() {
         return (
-            <div>
-                {this.state.users.map(u => <Link to= '/catalog' key = {u.name}><div >{u.name}</div></Link>)}
+            <div className ="users-container">
+                {this.state.users.map(u => <Link to= '/catalog' key = {u.name}><div className = "each-user">{u.name}</div></Link>)}
             </div>
         );
     }

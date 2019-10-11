@@ -3,7 +3,6 @@ import '../styles/Movie.css';
 
 class Movie extends Component {
 rentMovie = (event) => {
-    debugger 
     console.log(this.props.m.id)
     this.props.changeRented(this.props.m.id)
     
