@@ -7,7 +7,7 @@ class RentedMovies extends Component {
     return (
             <div>
             <h3>Rented Movies</h3>
-            <div>{rentedMovies.map(m => <Movie key = {m.id} movies = {rentedMovies}/>)}</div>
+            <div>{rentedMovies.map(m => <Movie key = {m.id} m= {m}/>)}</div>
             </div>
         );
     }
