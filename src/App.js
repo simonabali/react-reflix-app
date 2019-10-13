@@ -16,11 +16,12 @@ class App extends Component {
         { id: 2, isRented: false, title: "Beauty and the Beast", year: 1991, img: "https://images-na.ssl-images-amazon.com/images/I/81etFyb9N-L._SL1500_.jpg", descrShort: "A kickass woman named Belle who does not succumb to social norms gets crap from a bunch of village idiots, chief amongst them a total tool named Gaston. Belle shows everyone how great she is when she turns a beast (not Gaston) into a man. Love ensues, but then the villagers fall trap to severe group-think mentality led by the main tool himself." },
         { id: 3, isRented: true, title: "Billions", year: 2016, img: "https://is2-ssl.mzstatic.com/image/thumb/Video123/v4/3e/5f/58/3e5f585c-d5c6-844d-b048-448c4f274ed8/mzl.vbbypgjm.lsr/268x0w.jpg", descrShort: "Emmy® and Golden Globe® winners Paul Giamatti and Damian Lewis star in a complex drama about power politics in the world of New York high finance. Shrewd, savvy U.S. Attorney Chuck Rhoades (Giamatti) and the brilliant, ambitious hedge fund king Bobby Axelrod (Lewis) are on an explosive collision course, with each using all of his considerable smarts, power and influence to outmaneuver the other. The stakes are in the billions in this timely, provocative series." },
         { id: 4, isRented: false, title: "Beauty and the Beast", year: 2016, img: "https://images-na.ssl-images-amazon.com/images/I/51ArFYSFGJL.jpg", descrShort: "Basically the same as the original, except now Hermi-- Emma Wattson plays Belle, fittingly so some would say, given how actively progressive she is regarding women's rights. Rumor has it that in the bonus scenes she whips out a wand and turns Gaston into a toad, but in order to watch those scenes you need to recite a certain incantation." },
-      ]
+      ],
+      search: ""
     }
   }
+
   changeRentedStatus = (movieId) => {
-debugger 
 let updatedMovies = [...this.state.movies]
 let indexMovieToUpdate = updatedMovies.findIndex(m => movieId === m.id)
 let newMovieData = updatedMovies[indexMovieToUpdate]
@@ -29,8 +30,14 @@ updatedMovies.splice(indexMovieToUpdate, newMovieData)
 this.setState({movies: updatedMovies})
   }
 
+searchFunc = (event) => {
+  this.setState ({search:event.target.value})
+  console.log( this.state.search)
+  console.log(event.target.value)
   
-  
+}  
+ 
+
    
   render() {
     return (
@@ -41,10 +48,10 @@ this.setState({movies: updatedMovies})
               <Link to="/">Home</Link>
               <Link to="/catalog">Catalog</Link>
               <div id = "logo">REFLIX</div>
-            </div>
             
+            </div>
             <Route exact path="/" component={Landing} />
-            <Route exact path="/catalog" render={() => <Catalog movies={this.state.movies} changeRented = {this.changeRentedStatus} />} />
+            <Route exact path="/catalog" render={() => <Catalog movies={this.state.movies} changeRented = {this.changeRentedStatus} searchFunc = {this.searchFunc} search = {this.state.search}/>} />
             <Route path="/catalog/:movieId" exact render={({ match }) => <MovieDetail match={match} movies= {this.state.movies} changeRented = {this.changeRented}/>} />
           </div>
         </Router>
